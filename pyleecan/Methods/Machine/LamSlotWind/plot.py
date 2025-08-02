@@ -16,8 +16,9 @@ from ....Functions.Plot.get_color_legend_from_surface import (
 )
 
 PHASE_COLORS = config_dict["PLOT"]["COLOR_DICT"]["PHASE_COLORS"]
-PLUS_HATCH = "++"
-MINUS_HATCH = ".."
+PLUS_HATCH = ""  # "++"
+MINUS_HATCH = ""  # ".."
+PHASE_HATCHES = config_dict["PLOT"]["COLOR_DICT"]["PHASE_HATCHES"]  # added by Nils
 
 
 def plot(
@@ -92,8 +93,8 @@ def plot(
     """
     # Arrow style
     head = None
-    style = "Simple, tail_width=2, head_width=8, head_length=12"
-    kw = dict(arrowstyle=style, linewidth=0.8, edgecolor="k")
+    style = "Simple, tail_width=1, head_width=6, head_length=10"  # Nils changed tail_width=2, head_width=8, head_length=12 to tail_width=1, head_width=6, head_length=10
+    kw = dict(arrowstyle=style, linewidth=0.5, edgecolor="k")  # Nils changed linewidth=0.8 to linewidth=0.5
 
     # If the winding is user defined, we can not plot the radial pattern
     if isinstance(self.winding, WindingUD):
@@ -141,8 +142,12 @@ def plot(
                 color, sign = find_wind_phase_color(wind_mat=wind_mat, label=surf.label)
                 if sign == "+" and is_add_sign:
                     hatch = PLUS_HATCH
+                    # hatch = PHASE_HATCHES[0]  # [idx_phase]
+                    # color = [1.0, 0.0, 0.0, 1.0]  # "red"  # added by Nils
                 elif sign == "-" and is_add_sign:
                     hatch = MINUS_HATCH
+                    # hatch = PHASE_HATCHES[0]  # [idx_phase]
+                    # color = [0.0, 0.0, 1.0, 1.0]  # "blue"  # added by Nils
                 else:
                     hatch = None
                 patches.extend(
@@ -298,6 +303,33 @@ def plot(
                     **kw
                 )
                 patches.append(line)
+                
+                # Added by Nils
+                factor = 0.27
+                start_point_complex = start_slot_surf.comp_point_ref()
+                end_point_complex = end_slot_surf.comp_point_ref()
+                start_point_shifted_complex = start_point_complex * (1 + factor)
+                end_point_shifted_complex = end_point_complex * (1 + factor)
+                start_point_shifted_cartesian = [
+                    start_point_shifted_complex.real,
+                    start_point_shifted_complex.imag,
+                ]
+                end_point_shifted_cartesian = [
+                    end_point_shifted_complex.real,
+                    end_point_shifted_complex.imag,
+                ]
+                # ax.text(start_point[0], start_point[1], '+', fontsize=16, ha='center', va='center')
+                # ax.text(end_point[0], end_point[1], '-', fontsize=16, ha='center', va='center')
+                
+                ax.text(start_point_shifted_cartesian[0], start_point_shifted_cartesian[1], '+', fontsize=8, ha='center', va='center')
+                ax.text(end_point_shifted_cartesian[0], end_point_shifted_cartesian[1], '-', fontsize=12, ha='center', va='center')
+                
+                # theta1 = np.arctan2(start_point_shifted_cartesian[1], start_point_shifted_cartesian[0])
+                # theta2 = np.arctan2(end_point_shifted_cartesian[1], end_point_shifted_cartesian[0])
+                # theta_avg = (theta1 + theta2) / 2
+                # x_avg = np.sqrt(start_point_shifted_cartesian[0]**2 + start_point_shifted_cartesian[1]**2) * np.cos(theta_avg)
+                # y_avg = np.sqrt(start_point_shifted_cartesian[0]**2 + start_point_shifted_cartesian[1]**2) * np.sin(theta_avg)
+                # ax.text(x_avg[0], y_avg[1], '-', fontsize=8, ha='center', va='center')
 
     if is_display:
         # Display the result

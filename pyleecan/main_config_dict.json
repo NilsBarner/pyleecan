@@ -1,0 +1,29 @@
+{
+    "GUI": {
+        "CSS_NAME": "pyleecan.css",
+        "CSS_PATH": "",
+        "UNIT_M": 1,
+        "UNIT_M2": 1
+    },
+    "MAIN": {
+        "MACHINE_DIR": "",
+        "MATLIB_DIR": "",
+        "RESULT_DIR": ""
+    },
+    "PLOT": {
+        "COLOR_DICT": {},
+        "COLOR_DICT_NAME": "pyleecan_color_nils.json",
+        "FONT_FAMILY_PYVISTA": "courier",
+        "FONT_NAME": "DejaVu Sans",
+        "FONT_SIZE_LABEL": 17,
+        "FONT_SIZE_LEGEND": 17,
+        "FONT_SIZE_TITLE": 17,
+        "LINE_STYLE": [
+            "solid",
+            "dashed",
+            "dashdot",
+            "dotted"
+        ]
+    },
+    "version": "1.5.2"
+}

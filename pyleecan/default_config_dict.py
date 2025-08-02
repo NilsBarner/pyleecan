@@ -10,7 +10,8 @@ default_config_dict["GUI"]["UNIT_M2"] = 1  # Surface unit: 0 for m^2, 1 for mm^2
 default_config_dict["GUI"]["CSS_NAME"] = "pyleecan.css"
 default_config_dict["GUI"]["CSS_PATH"] = ""
 # Name of the color set to use
-default_config_dict["PLOT"]["COLOR_DICT_NAME"] = "pyleecan_color.json"
+# default_config_dict["PLOT"]["COLOR_DICT_NAME"] = "pyleecan_color.json"
+default_config_dict["PLOT"]["COLOR_DICT_NAME"] = "pyleecan_color_nils.json"
 default_config_dict["PLOT"]["COLOR_DICT"] = {}
 default_config_dict["PLOT"]["FONT_NAME"] = ""
 default_config_dict["PLOT"]["FONT_FAMILY_PYVISTA"] = "courier"

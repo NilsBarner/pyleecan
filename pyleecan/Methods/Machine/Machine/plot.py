@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from ....Functions.init_fig import init_fig
 from matplotlib.patches import Patch
 from ....definitions import config_dict
+#from ....plot_lattice_hex import plot_lattice_hex  # added by Nils
 
 REF_EDGE_COLOR = "k"
 COMP_EDGE_COLOR = "r--"
@@ -74,7 +75,7 @@ def plot(
     ax : Matplotlib.axes.Axes object
         Axis containing the plot
     """
-
+    
     # Get maximum symetry for plot
     if is_max_sym:
         pera, is_apera = self.comp_periodicity_spatial()
@@ -162,7 +163,18 @@ def plot(
         label_leg = ["Reference", comp_legend]
         ax.set_axis_off()
         ax.legend(patch_leg, label_leg)
-
+       
+    # # Lattice heat exchanger plot added by Nils
+    #plot_lattice_hex(
+    #    fig,
+    #    ax,
+    #    r_in=self.stator.R_hex_in,  # inner radius [m]
+    #    r_out=self.stator.Rint,  # outer radius [m]
+    #    h=self.stator.a,  # radial spacing (ring thickness) [m]
+    #    w=self.stator.a,  # desired arc width in each ring [m]
+    #    d=self.stator.d  # mean strut thickness [m]
+    #)
+       
     ax.set_xlabel("Position along x-axis [m]")
     ax.set_ylabel("Position along y-axis [m]")
     if fig_title is None:

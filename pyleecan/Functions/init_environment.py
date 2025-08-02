@@ -211,7 +211,7 @@ def get_config_dict():
     save_config_dict(config_dict)
 
     # Load the color_dict
-    def_color_path = join(USER_DIR, "Plot", "pyleecan_color.json")
+    def_color_path = join(USER_DIR, "Plot", "pyleecan_color_nils.json")  # changed by Nils from pyleecan_color.json to pyleecan_color_nils.json
     color_path = join(USER_DIR, "Plot", config_dict["PLOT"]["COLOR_DICT_NAME"])
     # Get default
     with open(def_color_path, "r") as color_file:
